@@ -45,7 +45,6 @@ class DMXConnection(object):
     '''
 
     for chan in channel:
-        print "channel = ", chan
         if not 1 <= chan-1 <= DMX_SIZE:
           print 'Invalid channel specified: %s' % chan-1
           return
