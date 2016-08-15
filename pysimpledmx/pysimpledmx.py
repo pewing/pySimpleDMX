@@ -38,17 +38,21 @@ class DMXConnection(object):
     print "Opened %s." % (self.com.portstr)
 
 
-  def setChannel(self, chan, val, autorender = False):
+  def setChannel(self, channel, val, autorender = False):
     '''
     Takes channel and value arguments to set a channel level in the local
     DMX frame, to be rendered the next time the render() method is called.
     '''
-    if not 1 <= chan-1 <= DMX_SIZE:
-      print 'Invalid channel specified: %s' % chan-1
-      return
-    # clamp value
-    val = max(0, min(val, 255))
-    self.dmx_frame[chan-1] = val
+
+    for chan in channel:
+        print "channel = ", chan
+        if not 1 <= chan-1 <= DMX_SIZE:
+          print 'Invalid channel specified: %s' % chan-1
+          return
+        # clamp value
+        val = max(0, min(val, 255))
+        self.dmx_frame[chan-1] = val
+
     if autorender: self.render()
 
   def clear(self, chan = 0):
